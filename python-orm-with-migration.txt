@@ -1,0 +1,75 @@
+Python - Object-Relational Mapping
+----------------------------------
+
+This is a two part question. In the first part, you'll design a database
+schema to support a simple web application. In the second part, business
+requirements will change (they have a way of doing that :) and you'll adapt
+your solution to that.
+
+If you know how, please write your schemas as series Python classes that would
+get mapped to a relational database via an ORM. For example, a simple
+class/student schema might look like:
+
+    class Class:
+        subject = CharString()
+        teacher_name = CharString()
+
+    class Student:
+        name = CharString()
+        class = ForeignKey(to=Class)
+
+If you're not comfortable producing a schema in this notation, please fall
+back on writing in out it sql (ie. CREATE TABLE...). ORM notation is preferred.
+
+Part 1
+~~~~~~
+
+You're building a gift registry. This is 1995 and this has never been done
+before.
+
+In your gift registry, the user experience flow is:
+
+    - A user can register gifts they'd like. Each gift has a price.
+    - A user can browse through the list of unfulfilled gifts other users have
+      requested.
+    - A user can buy other user's gifts for them.
+
+You may assume:
+
+    - gift prices, contribution values are all positive
+
+Your design should prioritize schema simplicity. Don't worry about how the
+system will perform at scale, the goal here is to get a proof of concept out
+the door so you can attract more early-stage funding ;)
+
+In addition to the above schema, please write out the SQL that will be
+executed for each of the three elements above under "the user experience
+flow is...".
+
+Part 2
+~~~~~~
+
+So you released v1 of your awesome gift registry, got about 1000 users of
+friends, friends of friends, and all of your mom's book club. But it's just
+not catching on. After brainstorming, your team has figured out the
+reason its not taking off is because... users want to be able to buy _part_
+of a gift, rather than being forced to buy the whole thing. So now, in
+addition to the above requirements:
+
+    - A user can make contributions to other users' unfulfilled gifts. The
+      contribution has a value, and may or may not cover the entire price of
+      the gift.
+    - A gift is considered 'fulfilled' when all contributions to the gift add
+      up to the price of the gift.
+    - A user can browse through the list of unfulfilled gifts other users have
+      requested.
+
+Please write out your new schema that will support this additional functional,
+again preferably in ORM notation.
+
+Now, as you move to v2 of your gift registry, you don't want to loose the
+1000 users you already have and their history of buying gifts for each other.
+How will you handle this? If you're familiar with any 3rd-party tools to
+handle this transition, please use them to write out a solution. If not, you
+can write out a script or some SQL to describe what needs to happen to
+transition from v1 to v2. Could you implement the transition with no downtime?

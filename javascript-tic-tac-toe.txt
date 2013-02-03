@@ -1,0 +1,61 @@
+Javascript - Tic Tac Toe
+------------------------
+
+For this question you will write up a slightly simplified nxn tic-tac-toe game
+in Javascript using Object Oriented Programming.
+
+Your initial 'board' is a grid of nxn squares. As game play progresses,
+each square can get filled by an 'X', 'O', or remain empty - just like normal
+tic-tac-toe.  The game is won with three (always three - regardless of board
+size) in a row of 'X' or 'O' in any direction, _not_ including diagonals.
+
+You will have one singleton object a 'board', through which the players will
+play. Here's your starting point:
+
+    var Board = function(side_length) {
+        // do initialization here... 
+    };
+
+    Board.prototype.square_is = function(row, col, X_or_O) {
+        // do stuff...
+    };
+
+    Board.prototype.winner = function() {
+        // returns either 'X', 'O', or null
+    };
+
+Here's an example of how the board would be used to play through a game:
+
+    function game1() {
+        var board = new Board(3);
+
+        board.square_is(1, 1, 'X');
+        board.square_is(1, 0, 'O');
+        board.square_is(0, 1, 'X');
+        board.square_is(2, 1, 'O');
+        board.square_is(0, 2, 'X');
+        board.square_is(2, 0, 'O');
+
+        // check for a winner - won't find one.
+        if (board.winner()) {
+            alert('Winner!! -> ' + board.winner());
+            return;
+        }
+
+        board.square_is(0, 0, 'X');
+
+        // check for a winner - X has won.
+        if (board.winner()) {
+            alert('Winner!! -> ' + board.winner());
+            return;
+        }
+    }
+
+Add different types of objects and/or extend the board object as necessary.
+Your priority is code clarity and maintainability, _not_ efficiency.
+
+Bonus points:
+-------------
+
+Hook this up to a simple UI in a web page! How you design the UI is up to you,
+but we're looking for is clean & clear css & html.
