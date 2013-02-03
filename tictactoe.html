@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tick Tac Toe - Prism Skylabs</title>
+	<script type="text/javascript" src='tictactoe.js'></script>
+	<script type="text/javascript" src='http://code.jquery.com/jquery-1.9.0.js'></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			window.board = new Board(3);
+			window.x_turn = true;
+			window.o_turn = false;
+			$('body').append($(window.board.render()));
+
+			$('.node').click(function () {
+				if (window.won) {
+					return;
+				}
+				if (window.x_turn) {
+					if (window.board.get($(this).attr('data-row'), $(this).attr('data-col')) === '') {
+						console.log('hello');
+						$(this).html('X');
+						window.board.square_is($(this).attr('data-row'), $(this).attr('data-col'), 'X');
+						if (window.board.winner()) {
+							$('body').prepend('<div class="board">' + window.board.winner() + ' won!</div>');
+							window.won = true;
+							return;
+						}
+						window.x_turn = false;
+						window.o_turn = true;
+						$('board').html(window.board.render());
+					}
+				} else if (window.o_turn) {
+					if (window.board.get($(this).attr('data-row'), $(this).attr('data-col')) === '') {
+						console.log('hello');
+						$(this).html('O');
+						window.board.square_is($(this).attr('data-row'), $(this).attr('data-col'), 'O');
+						if (window.board.winner()) {
+							$('body').prepend('<div class="board">' + window.board.winner() + ' won!</div>');
+							window.won = true;
+							return;
+						}
+						window.o_turn = false;
+						window.x_turn = true;
+						$('board').html(window.board.render());
+					}
+				}
+			});
+		});
+	</script>
+
+	<style type="text/css">
+		.board {
+			display: block;
+			margin: 0 auto;
+			width: 300px;
+			margin-top: 200px;
+		}
+
+		.row {
+			display: block;
+		}
+
+		.node {
+			display: inline-block;
+			margin: 4px;
+			width: 50px;
+			height: 50px;
+			color: black;
+			background-color: #bbb;
+			vertical-align: top;
+		}
+	</style>
+</head>
+<body>
+
+</body>
+</html>
